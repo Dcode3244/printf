@@ -23,4 +23,9 @@ int print_char(va_list ap, char *buffer);
 int print_string(va_list ap, char *buffer);
 int print_percent(va_list ap, char *buffer);
 int print_digit(va_list ap, char *buffer);
+int print_binary(va_list ap, char *buffer);
+int print_unsigned(va_list ap, char *buffer);
+int print_hexa(va_list ap, char *buffer);
+int print_octal(va_list ap, char *buffer);
+int print_X(va_list ap, char *buffer);
 #endif
