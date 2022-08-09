@@ -18,10 +18,9 @@ typedef struct printer
 } printer;
 
 int _printf(const char *format, ...);
-int (*checker(const char *symbol))(va_list list, char *buffer);
-int print_c(va_list list, char *buffer);
-int print_s(va_list list, char *buffer);
-int print_percent(va_list list, char *buffer);
-
-
+int (*checker(const char *symbol))(va_list ap, char *buffer);
+int print_char(va_list ap, char *buffer);
+int print_string(va_list ap, char *buffer);
+int print_percent(va_list ap, char *buffer);
+int print_digit(va_list ap, char *buffer);
 #endif
