@@ -8,44 +8,44 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	char *buffer, *buffer_ptr;
-	int i, percents = 0, ret, len = 0, add = 0;
+	va_list ap;
+	char *buffer, *ptr_buff;
+	int i, last = 0, buff_len, len = 0, ap_len = 0;
 
-	buffer = malloc(sizeof(char) * 1024);
+	buffer = malloc(sizeof(char) * 2048);
 	if (buffer == NULL || format == NULL)
 		return (-1);
-	buffer_ptr = buffer;
+	ptr_buff = buffer;
 
-	va_start(args, format);
-	for (i = 0; *(format + i); i++)
+	va_start(ap, format);
+	for (i = 0; *(format + i) != '\0'; i++)
 	{
 		if (*(format + i) == '%')
 		{
-			percents++;
+			last++;
 			if (checker(format + i + 1))
 			{
 				i++;
-				add = checker(format + i)(args, buffer);
-				buffer += add;
-				len += add;
-				ret = len;
-				percents--;
+				ap_len = checker(format + i)(ap, buffer);
+				buffer += ap_len;
+				len += ap_len;
+				buff_len = len;
+				last--;
 				continue;
 			}
-			if (*(format + i + 1) == '\0' && percents == 1)
+			if (*(format + i + 1) == '\0' && last == 1)
 			{
-				ret = -1;
+				buff_len = -1;
 				break;
 			}
 		}
 		*buffer = *(format + i);
 		len++;
 		buffer++;
-		ret = len;
+		buff_len = len;
 	}
-	write(1, buffer_ptr, len);
-	va_end(args);
-	free(buffer_ptr);
-	return (ret);
+	write(1, ptr_buff, len);
+	va_end(ap);
+	free(ptr_buff);
+	return (buff_len);
 }
