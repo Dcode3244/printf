@@ -2,22 +2,24 @@
 
 /**
  * checker - checks if symboll matches with any characters
- * @symbol: the symboll to be checked
+ * @c: the symboll to be checked
  *
- * Return: a matching function of NULL if it fails
+ * Return: pointer to a matching function or NULL if it fails
  */
-int (*checker(const char *symbol))(va_list list, char *buffer)
+int (*checker(const char *c))(va_list ap, char *buffer)
 {
 	printer fmt[] = {
-		{"c", print_c},
-		{"s", print_s},
+		{"c", print_char},
+		{"s", print_string},
 		{"%", print_percent},
+		{"d", print_digit},
+		{"i", print_digit}
 	};
 	int i;
 
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 5; i++)
 	{
-		if (*symbol == *(fmt[i].fmt))
+		if (*c == *(fmt[i].fmt))
 			return (fmt[i].print);
 	}
 
