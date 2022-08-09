@@ -2,12 +2,12 @@
 
 /**
  * print_percent - Prints a %
- * @list: arguments
+ * @ap: arguments
  * @buffer: stores characters
  *
  * Return: Always 1.
  */
-int print_percent(va_list __attribute__((__unused__)) list, char *buffer)
+int print_percent(va_list __attribute__((__unused__)) ap, char *buffer)
 {
 	*buffer = '%';
 
